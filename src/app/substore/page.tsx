@@ -63,11 +63,6 @@ export default function SubstorePanel() {
     const [selectedEwelinkAccountId, setSelectedEwelinkAccountId] = useState<string | null>(null);
     const [globalEwelinkConfig, setGlobalEwelinkConfig] = useState<{ appid: string; secret: string } | null>(null);
 
-    // Cihaz kontrol işlemleri için state'ler
-    const [controlLoading, setControlLoading] = useState<string | null>(null); // Hangi cihazın kontrol edildiğini tutar (deviceId)
-    const [controlMessage, setControlMessage] = useState<string | null>(null);
-    const [controlError, setControlError] = useState<string | null>(null);
-
     const router = useRouter(); // useRouter hook'unu burada başlatın
 
     useEffect(() => {
@@ -352,49 +347,7 @@ export default function SubstorePanel() {
             setFormLoading(false);
         }
     };
-
-    // Cihaz kontrol fonksiyonu (API rotasını çağırır)
-    const handleDeviceControl = async (device_id: string, action: 'on' | 'off') => {
-        if (!user || !selectedEwelinkAccountId) {
-            setControlError('Kullanıcı oturumu veya Ewelink hesabı seçili değil.');
-            return;
-        }
-
-        setControlLoading(device_id);
-        setControlMessage(null);
-        setControlError(null);
-
-        try {
-            const response = await fetch('/api/control-device', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    userId: user.uid,
-                    ewelinkAccountId: selectedEwelinkAccountId,
-                    deviceId: device_id,
-                    action: action,
-                }),
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                setControlMessage(data.message);
-            } else {
-                setControlError(data.error || 'Cihaz kontrol hatası.');
-            }
-        } catch (err: unknown) {
-            console.error('Cihaz kontrol isteği gönderilirken hata:', err);
-            const errorMessage = err instanceof Error ? err.message : 'Bilinmeyen bir hata oluştu.';
-            setControlError(`İstek gönderilemedi: ${errorMessage}`);
-        } finally {
-            setControlLoading(null);
-        }
-    };
-
-
+    
     return (
         <div style={{ padding: '20px', maxWidth: '900px', margin: '0 auto', fontFamily: 'Arial, sans-serif' }}>
             <h1 style={{ color: '#f0f0f0', marginBottom: '30px', textAlign: 'center' }}>Alt Mağaza Paneli</h1>
@@ -423,12 +376,12 @@ export default function SubstorePanel() {
             </div>
 
             {/* Mesaj Bölümü */}
+            <div style={{ color: '#ffc107', backgroundColor: '#fff3cd1a', padding: '10px', borderRadius: '5px', marginBottom: '20px', border: '1px solid #ffc107' }}>
+                Device control is temporarily disabled due to a system issue.
+            </div>
             {formSuccess && <div style={{ color: '#28a745', backgroundColor: '#e6ffe61a', padding: '10px', borderRadius: '5px', marginBottom: '20px', border: '1px solid #28a745' }}>{formSuccess}</div>}
             {formError && <div style={{ color: '#dc3545', backgroundColor: '#ffe6e61a', padding: '10px', borderRadius: '5px', marginBottom: '20px', border: '1px solid #dc3545' }}>{formError}</div>}
-            {controlMessage && <div style={{ color: '#17a2b8', backgroundColor: '#e8f8fa1a', padding: '10px', borderRadius: '5px', marginBottom: '20px', border: '1px solid #17a2b8' }}>{controlMessage}</div>}
-            {controlError && <div style={{ color: '#dc3545', backgroundColor: '#ffe6e61a', padding: '10px', borderRadius: '5px', marginBottom: '20px', border: '1px solid #dc3545' }}>{controlError}</div>}
-
-
+            
             {/* Mevcut Ewelink Hesaplarını Listeleme ve Seçme */}
             <div style={{
                 backgroundColor: '#2a2a2a',
@@ -568,18 +521,18 @@ export default function SubstorePanel() {
                                         <td style={tableCellStyle}>{device.created_at ? device.created_at.toDate().toLocaleString() : 'N/A'}</td>
                                         <td style={tableCellStyle}>
                                             <button
-                                                onClick={() => handleDeviceControl(device.device_id, 'on')}
-                                                disabled={controlLoading === device.device_id}
+                                                disabled={true}
                                                 style={{ ...buttonStyle, backgroundColor: '#28a745', marginRight: '5px', padding: '8px 12px' }}
+                                                title="Device control is temporarily unavailable"
                                             >
-                                                {controlLoading === device.device_id ? 'Açılıyor...' : 'Aç'}
+                                                Aç
                                             </button>
                                             <button
-                                                onClick={() => handleDeviceControl(device.device_id, 'off')}
-                                                disabled={controlLoading === device.device_id}
+                                                disabled={true}
                                                 style={{ ...buttonStyle, backgroundColor: '#dc3545', padding: '8px 12px' }}
+                                                title="Device control is temporarily unavailable"
                                             >
-                                                {controlLoading === device.device_id ? 'Kapatılıyor...' : 'Kapat'}
+                                                Kapat
                                             </button>
                                         </td>
                                     </tr>
