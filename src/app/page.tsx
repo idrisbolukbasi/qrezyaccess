@@ -1,310 +1,111 @@
 'use client';
-
 import Image from 'next/image';
-import { Box, Container, Typography, Button, Card, CardContent } from '@mui/material';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { QrCode, ShieldCheck, Cog, Users, ClipboardList } from 'lucide-react';
 
-// Sistem fontlarını veya tercih edilen bir web fontunu kullanın
-const bodyFontFamily = 'Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'; // Inter fontu ekledim
-const headingFontFamily = 'Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif';
-
-
-// Ana Sayfa bileşeni
 export default function Home() {
-  const router = useRouter();
-
-  const handleStoreLoginClick = () => {
-    router.push('/auth/login');
-  };
+  const features = [
+    {
+      icon: <ShieldCheck className="w-10 h-10 text-primary" />,
+      title: 'QR Kod ile Güvenli Giriş',
+      description: 'Fiziksel kart veya anahtarlara ihtiyaç duymadan, QR kod okutarak hızlı ve güvenli erişim sağlayın.',
+    },
+    {
+      icon: <Cog className="w-10 h-10 text-primary" />,
+      title: 'Erişim Noktası Yönetimi',
+      description: 'Erişim noktalarınızı kolayca ekleyin, düzenleyin ve hangi kullanıcının nereye erişebileceğini yönetin.',
+    },
+    {
+      icon: <Users className="w-10 h-10 text-primary" />,
+      title: 'Kullanıcı ve Alt Mağaza Yönetimi',
+      description: 'Kullanıcı hesaplarını ve alt mağazalar için özel erişim izinlerini esnek ve ölçeklenebilir araçlarla yönetin.',
+    },
+    {
+      icon: <ClipboardList className="w-10 h-10 text-primary" />,
+      title: 'Detaylı Erişim Kayıtları',
+      description: 'Tüm erişim aktivitelerini detaylı olarak takip edin. Kimin, ne zaman ve nereye eriştiğini anlık olarak görün.',
+    },
+  ];
 
   return (
-    <>
-      {/* Hero Section */}
-      <Box
-        sx={{
-          minHeight: '80vh',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'flex-start',
-          backgroundImage: 'url(/images/QRezy_Access_Homepage_Image.png)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          color: '#F5F5F5', // Metin rengini ayarla
-          textAlign: 'center',
-          padding: { xs: '40px 20px', md: '60px 40px' }, // Responsive padding
-          fontFamily: bodyFontFamily,
-        }}
-      >
-        <Container>
-          <Typography
-            variant="h2"
-            component="h1"
-            gutterBottom
-            sx={{
-              textAlign: 'left',
-              fontFamily: headingFontFamily,
-              fontSize: { xs: '2.8rem', sm: '3.5rem', md: '4.5rem' }, // Daha büyük ve responsive başlık
-              lineHeight: 1.1,
-              color: '#F5F5F5', // Başlık metin rengi
-              textShadow: '2px 2px 5px rgba(0,0,0,0.7)', // Okunabilirliği artırmak için gölge
-            }}
-          >
-            QR Kod ile Sorunsuz ve Güvenli Erişim
-          </Typography>
-          <Typography
-            variant="h5"
-            gutterBottom
-            sx={{
-              textAlign: 'left',
-              maxWidth: '650px',
-              fontFamily: bodyFontFamily,
-              fontSize: { xs: '1.3rem', sm: '1.6rem', md: '1.8rem' }, // Daha büyük ve responsive metin
-              lineHeight: 1.4,
-              opacity: 0.9,
-              color: '#E0E0E0', // Metin rengi
-            }}
-          >
-            QRezy Access ile Erişim Noktalarınızı Kolayca Yönetin
-          </Typography>
-          <Button
-            variant="contained"
-            size="large"
-            onClick={handleStoreLoginClick}
-            sx={{
-              mt: 4, // Üstten boşluk artırıldı
-              alignSelf: 'flex-start',
-              fontFamily: bodyFontFamily,
-              bgcolor: '#4ECDC4', // Turkuaz rengi
-              color: '#1A1A1A', // Koyu metin
-              padding: '15px 35px', // Buton boyutu
-              borderRadius: '10px', // Daha yuvarlak köşeler
-              fontSize: '1.1rem',
-              fontWeight: 'bold',
-              boxShadow: '0 5px 15px rgba(78, 205, 196, 0.4)', // Turkuaz gölge
-              '&:hover': {
-                bgcolor: '#3DB0A6', // Hover'da biraz daha koyu turkuaz
-                boxShadow: '0 8px 20px rgba(78, 205, 196, 0.6)',
-                transform: 'translateY(-2px)', // Hafif yukarı hareket
-              },
-              transition: 'all 0.3s ease-in-out',
-            }}
-          >
-            Daha Fazla Bilgi Edinin
-          </Button>
-        </Container>
-      </Box>
-
-      {/* About Section */}
-      <Box sx={{ py: { xs: 8, md: 10 }, bgcolor: '#282828', fontFamily: bodyFontFamily, color: '#E0E0E0' }}>
-        <Container>
-          <Typography
-            variant="h4"
-            component="h2"
-            align="left"
-            gutterBottom
-            sx={{
-              fontFamily: headingFontFamily,
-              fontSize: { xs: '2.2rem', md: '3rem' },
-              lineHeight: 1.2,
-              color: '#F5F5F5', // Başlık metin rengi
-              marginBottom: '30px',
-            }}
-          >
-            QRezy Access Hakkında
-          </Typography>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: { xs: 'column', md: 'row' },
-              alignItems: 'center',
-              gap: { xs: 4, md: 8 },
-            }}
-          >
-            <Box sx={{ flex: 1 }}>
-              <Typography
-                variant="body1"
-                sx={{
-                  textAlign: 'left',
-                  fontFamily: bodyFontFamily,
-                  fontSize: { xs: '1.05rem', md: '1.15rem' },
-                  lineHeight: 1.7,
-                  color: '#E0E0E0', // Metin rengi
-                }}
-              >
-                QRezy Access, QR kod teknolojisini kullanarak modern ve güvenli erişim çözümleri sunan bir platformdur. Misyonumuz, işletmelerin ve kullanıcıların erişim yönetimi süreçlerini basitleştirmek, güvenliği artırmak ve verimliliği maksimize etmektir. Yenilikçi yaklaşımımızla, geleneksel erişim yöntemlerinin zorluklarını aşmayı hedefliyoruz.
-              </Typography>
-            </Box>
-            <Box sx={{ flex: 1, maxWidth: { xs: '100%', md: '50%' } }}>
-              <Image
-                src="/images/qr_scan_icon.png"
-                alt="About QRezy Access"
-                width={600} // Daha büyük boyut
-                height={350} // Oranı koruyarak yükseklik
-                layout="responsive"
-                style={{ borderRadius: '10px', boxShadow: '0 4px 15px rgba(0,0,0,0.3)' }} // Görsel iyileştirmeler
+    <div className="flex flex-col min-h-[100dvh]">
+      <main className="flex-1">
+        <section className="w-full py-12 md:py-24 lg:py-32">
+          <div className="container px-4 md:px-6">
+            <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
+              <div className="flex flex-col justify-center space-y-4">
+                <div className="space-y-2">
+                  <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
+                    QR Kod ile Sorunsuz ve Güvenli Erişim
+                  </h1>
+                  <p className="max-w-[600px] text-muted-foreground md:text-xl">
+                    QRezy Access ile erişim noktalarınızı kolayca yönetin. İşletmeniz için modern, hızlı ve güvenilir bir çözüm.
+                  </p>
+                </div>
+                <div className="flex flex-col gap-2 min-[400px]:flex-row">
+                  <Button asChild size="lg">
+                    <Link href="/auth/login">Hemen Başla</Link>
+                  </Button>
+                </div>
+              </div>
+               <Image
+                src="https://placehold.co/600x400.png"
+                width="600"
+                height="400"
+                alt="Hero"
+                data-ai-hint="access control security"
+                className="mx-auto aspect-video overflow-hidden rounded-xl object-cover sm:w-full lg:order-last"
               />
-            </Box>
-          </Box>
-        </Container>
-      </Box>
+            </div>
+          </div>
+        </section>
 
-      {/* Services Section */}
-      <Box sx={{ py: { xs: 8, md: 10 }, bgcolor: '#1A1A1A', fontFamily: bodyFontFamily, color: '#E0E0E0' }}>
-        <Container>
-          <Typography
-            variant="h4"
-            component="h2"
-            align="left"
-            gutterBottom
-            sx={{
-              fontFamily: headingFontFamily,
-              fontSize: { xs: '2.2rem', md: '3rem' },
-              lineHeight: 1.2,
-              color: '#F5F5F5', // Başlık metin rengi
-              marginBottom: '30px',
-            }}
-          >
-            Hizmetlerimiz
-          </Typography>
-          {/* Flexbox container for Services cards */}
-          <Box
-            sx={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: 4,
-              justifyContent: { xs: 'center', sm: 'flex-start' },
-            }}
-          >
-            {/* Her Kart için Tekrarlayan Stil */}
-            {[
-              {
-                title: 'QR Kod ile Güvenli Giriş',
-                description: 'Kullanıcılarınızın QR kodlarını tarayarak hızlı ve güvenli bir şekilde erişim sağlamasını sağlayın. Fiziksel kartlara veya anahtarlara olan ihtiyacı ortadan kaldırın.'
-              },
-              {
-                title: 'Erişim Noktası Yönetimi',
-                description: 'Erişim noktalarınızı kolayca ekleyin, düzenleyin ve yönetin. Hangi kullanıcının hangi noktalara erişebileceğini belirleyin.'
-              },
-              {
-                title: 'Kullanıcı ve Alt Mağaza Yönetimi',
-                description: 'Kullanıcı hesaplarını yönetin ve alt mağazalar için özel erişim izinleri tanımlayın. Esnek ve ölçeklenebilir yönetim araçları.'
-              },
-              {
-                title: 'Erişim Kayıtlarını İzleme',
-                description: 'Tüm erişim aktivitelerini detaylı olarak takip edin. Kimin ne zaman ve nereye eriştiğini görün.'
-              },
-              {
-                title: 'Cihaz Entegrasyonu',
-                description: 'QR kod okuyucu cihazlarınızla kolayca entegre olun. Mevcut altyapınıza uyum sağlayın.'
-              },
-              {
-                title: 'Özelleştirilebilir Çözümler',
-                description: 'İşletmenizin özel ihtiyaçlarına uygun erişim çözümleri için bizimle iletişime geçin.'
-              },
-            ].map((service, index) => (
-              <Box key={index} sx={{ flexBasis: { xs: '100%', sm: 'calc(50% - 16px)', md: 'calc(33.33% - 16px)' }, maxWidth: { xs: '100%', sm: 'calc(50% - 16px)', md: 'calc(33.33% - 16px)' }, display: 'flex' }}>
-                <Card sx={{
-                  height: '100%',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  width: '100%',
-                  backgroundColor: '#282828', // Kart arka planı
-                  borderRadius: '10px',
-                  boxShadow: '0 4px 15px rgba(0,0,0,0.4)',
-                  transition: 'transform 0.3s ease-in-out',
-                  '&:hover': {
-                    transform: 'translateY(-5px)', // Hover'da kartın hafifçe yükselmesi
-                    boxShadow: '0 8px 20px rgba(0,0,0,0.6)',
-                  }
-                }}>
-                  <CardContent sx={{ flexGrow: 1, padding: '25px' }}>
-                    <Typography
-                      variant="h6"
-                      component="h3"
-                      gutterBottom
-                      sx={{
-                        fontFamily: headingFontFamily,
-                        fontSize: { xs: '1.25rem', md: '1.4rem' },
-                        lineHeight: 1.3,
-                        color: '#4ECDC4', // Turkuaz başlık
-                        marginBottom: '15px',
-                      }}
-                    >
-                      {service.title}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        fontFamily: bodyFontFamily,
-                        fontSize: { xs: '0.95rem', md: '1.05rem' },
-                        lineHeight: 1.6,
-                        color: '#E0E0E0', // Metin rengi
-                      }}
-                    >
-                      {service.description}
-                    </Typography>
+        <section id="qr-scan" className="w-full py-12 md:py-24 lg:py-32 bg-secondary">
+          <div className="container px-4 md:px-6 flex flex-col items-center text-center">
+             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-4">Erişim için QR Kodu Tara</h2>
+             <p className="max-w-[700px] text-muted-foreground md:text-xl mb-8">
+                Giriş yapmak istediğiniz noktadaki QR kodu okutmak için aşağıdaki butona tıklayın.
+             </p>
+            <Button asChild variant="default" size="lg" className="h-20 w-20 rounded-full p-0">
+                <Link href="/qr-scan">
+                    <QrCode className="h-10 w-10 text-secondary-foreground" />
+                    <span className="sr-only">QR Kodu Tara</span>
+                </Link>
+            </Button>
+          </div>
+        </section>
+
+        <section id="features" className="w-full py-12 md:py-24 lg:py-32">
+          <div className="container px-4 md:px-6">
+            <div className="flex flex-col items-center justify-center space-y-4 text-center">
+              <div className="space-y-2">
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Neden QRezy Access?</h2>
+                <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                  Platformumuz, işletmenizin erişim kontrol ihtiyaçları için kapsamlı ve kullanıcı dostu çözümler sunar.
+                </p>
+              </div>
+            </div>
+            <div className="mx-auto grid max-w-5xl items-start gap-8 sm:grid-cols-2 md:gap-12 lg:max-w-none lg:grid-cols-4 mt-12">
+              {features.map((feature, index) => (
+                <Card key={index} className="h-full">
+                  <CardHeader className="flex flex-col items-center text-center">
+                    {feature.icon}
+                    <CardTitle className="mt-4">{feature.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent className="text-center text-muted-foreground">
+                    {feature.description}
                   </CardContent>
                 </Card>
-              </Box>
-            ))}
-          </Box>
-        </Container>
-      </Box>
-
-      {/* Contact Section */}
-      <Box sx={{ py: { xs: 8, md: 10 }, bgcolor: '#282828', textAlign: 'center', fontFamily: bodyFontFamily, color: '#E0E0E0' }}>
-        <Container>
-          <Typography
-            variant="h4"
-            component="h2"
-            gutterBottom
-            sx={{
-              fontFamily: headingFontFamily,
-              fontSize: { xs: '2.2rem', md: '3rem' },
-              lineHeight: 1.2,
-              color: '#F5F5F5', // Başlık metin rengi
-              marginBottom: '30px',
-            }}
-          >
-            Bizimle İletişime Geçin
-          </Typography>
-          <Typography
-            variant="body1"
-            sx={{
-              fontFamily: bodyFontFamily,
-              fontSize: { xs: '1.05rem', md: '1.15rem' },
-              lineHeight: 1.6,
-              mb: 4, // Buton ile arasına boşluk artırıldı
-              color: '#E0E0E0', // Metin rengi
-            }}
-          >
-            QRezy Access hakkında daha fazla bilgi almak veya bir demo talep etmek için bizimle iletişime geçin.
-          </Typography>
-          <Button
-            variant="contained"
-            size="large"
-            sx={{
-              mt: 2, // Üstten boşluk
-              fontFamily: bodyFontFamily,
-              bgcolor: '#FF6B6B', // Turuncu rengi
-              color: '#1A1A1A', // Koyu metin
-              padding: '15px 35px',
-              borderRadius: '10px',
-              fontSize: '1.1rem',
-              fontWeight: 'bold',
-              boxShadow: '0 5px 15px rgba(255, 107, 107, 0.4)', // Turuncu gölge
-              '&:hover': {
-                bgcolor: '#E05D5D', // Hover'da biraz daha koyu turuncu
-                boxShadow: '0 8px 20px rgba(255, 107, 107, 0.6)',
-                transform: 'translateY(-2px)',
-              },
-              transition: 'all 0.3s ease-in-out',
-            }}
-          >
-            İletişim Formu
-          </Button>
-        </Container>
-      </Box>
-    </>
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
+        <p className="text-xs text-muted-foreground">&copy; 2024 QRezy Access. Tüm hakları saklıdır.</p>
+      </footer>
+    </div>
   );
 }

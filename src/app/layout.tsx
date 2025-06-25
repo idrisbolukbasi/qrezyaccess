@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ['latin'] }); // Inter fontunu başlat
 
 // Metadata tanımları
 export const metadata = {
-  title: 'Qrezy Access',
+  title: 'QRezy Access',
   description: 'Ewelink Cihaz Yönetim Paneli',
 };
 
@@ -21,12 +21,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className} style={{ margin: 0, padding: 0 }}>
+    <html lang="tr">
+      <body className={inter.className}>
         {/* AuthProvider ile tüm uygulamayı sarmala */}
         <AuthProvider>
           <AppBar />
-          {children}
+          <main>{children}</main>
         </AuthProvider>
       </body>
     </html>

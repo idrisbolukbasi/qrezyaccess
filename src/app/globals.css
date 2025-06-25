@@ -1,80 +1,38 @@
-/* src/app/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* Temel sıfırlama ve box-sizing */
-html,
-body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-  line-height: 1.6;
+@layer base {
+  :root {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+    --radius: 0.5rem;
+  }
 }
 
-/* Koyu tema için temel renkler */
-body {
-  background-color: #1a1a1a; /* Koyu arka plan */
-  color: #e0e0e0; /* Açık gri metin rengi */
-}
-
-/* Bağlantılar için stil */
-a {
-  color: #61dafb; /* Açık mavi */
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-/* Başlıklar için temel stil */
-h1, h2, h3, h4, h5, h6 {
-  color: #f0f0f0; /* Açık başlık rengi */
-  margin-top: 0;
-  margin-bottom: 0.5em;
-}
-
-p {
-  margin-top: 0;
-  margin-bottom: 1em;
-}
-
-/* Genel input ve button stilleri için başlangıç */
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="number"],
-textarea {
-  background-color: #333; /* Koyu input arka planı */
-  color: #e0e0e0; /* Açık input metin rengi */
-  border: 1px solid #555; /* Koyu kenarlık */
-  padding: 10px;
-  border-radius: 4px;
-  font-size: 1em;
-  box-sizing: border-box;
-}
-
-button {
-  background-color: #007bff; /* Mavi buton arka planı */
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1em;
-  transition: background-color 0.2s ease-in-out, opacity 0.2s ease-in-out;
-}
-
-button:hover {
-  background-color: #0056b3; /* Hoverda daha koyu mavi */
-}
-
-button:disabled {
-  background-color: #6c757d; /* Pasif buton rengi */
-  cursor: not-allowed;
-  opacity: 0.7;
-}
-
-/* Genel kapsayıcılar için box-shadow */
-div[style*="boxShadow"] {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Koyu arkaplanda daha belirgin gölge */
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
 }
