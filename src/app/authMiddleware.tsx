@@ -96,7 +96,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       console.log('AuthMiddleware useEffect temizlendi.');
       unsubscribe();
     };
-  }, [router, pathname]);
+  }, [router, pathname, loading]);
 
   return (
     <AuthContext.Provider value={{ user, role, loading }}>

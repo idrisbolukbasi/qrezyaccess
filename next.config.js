@@ -1,11 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // `app` dizini için deneysel özellik.
-  // Eğer projeniz `pages` dizinini kullanıyorsa bu satırı kaldırabilirsiniz.
-  experimental: {
-    appDir: true,
-    serverComponentsExternalPackages: ['ewelink-api-next'], // ewelink-api-next'i sunucu bileşenleri için harici paket olarak işaretle
-  },
+  // `serverComponentsExternalPackages` Next.js'in yeni sürümlerinde ana yapılandırma seviyesine taşındı.
+  serverExternalPackages: ['ewelink-api-next'],
   
   // Webpack yapılandırmasını özelleştirme
   webpack: (config, { isServer }) => {
